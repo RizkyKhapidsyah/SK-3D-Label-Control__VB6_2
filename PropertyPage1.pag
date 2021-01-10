@@ -1,0 +1,211 @@
+VERSION 5.00
+Begin VB.PropertyPage PropertyPage1 
+   Caption         =   "Properties"
+   ClientHeight    =   5565
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   4875
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   5565
+   ScaleWidth      =   4875
+   Begin VB.Frame Frame2 
+      Caption         =   " Shadow Orientation "
+      Height          =   2595
+      Left            =   592
+      TabIndex        =   0
+      Top             =   2085
+      Width           =   3675
+      Begin VB.CommandButton cmdShadowPos 
+         Height          =   495
+         Index           =   0
+         Left            =   1155
+         Picture         =   "PropertyPage1.pgx":0000
+         Style           =   1  'Graphical
+         TabIndex        =   4
+         Top             =   1215
+         Width           =   480
+      End
+      Begin VB.CommandButton cmdShadowPos 
+         Height          =   495
+         Index           =   1
+         Left            =   1620
+         Picture         =   "PropertyPage1.pgx":0442
+         Style           =   1  'Graphical
+         TabIndex        =   3
+         Top             =   720
+         Width           =   480
+      End
+      Begin VB.CommandButton cmdShadowPos 
+         Height          =   495
+         Index           =   2
+         Left            =   2085
+         Picture         =   "PropertyPage1.pgx":0884
+         Style           =   1  'Graphical
+         TabIndex        =   2
+         Top             =   1200
+         Width           =   480
+      End
+      Begin VB.CommandButton cmdShadowPos 
+         Height          =   495
+         Index           =   3
+         Left            =   1620
+         Picture         =   "PropertyPage1.pgx":0CC6
+         Style           =   1  'Graphical
+         TabIndex        =   1
+         Top             =   1680
+         Width           =   480
+      End
+   End
+   Begin VB.Timer Timer1 
+      Interval        =   100
+      Left            =   75
+      Top             =   4815
+   End
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Label"
+      BeginProperty Font 
+         Name            =   "Comic Sans MS"
+         Size            =   72
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   2025
+      Left            =   607
+      TabIndex        =   5
+      Top             =   0
+      Width           =   3570
+   End
+   Begin VB.Label Label2 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Label"
+      BeginProperty Font 
+         Name            =   "Comic Sans MS"
+         Size            =   72
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
+      Height          =   2025
+      Left            =   712
+      TabIndex        =   6
+      Top             =   60
+      Width           =   3570
+   End
+End
+Attribute VB_Name = "PropertyPage1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
+Private Enum ShadowDirection
+    Left = 0
+    Up = 1
+    Right = 2
+    Down = 3
+End Enum
+
+Private Direction As ShadowDirection
+Private intShadowLeft As Integer
+Private intShadowTop As Integer
+
+Private Sub cmdShadowPos_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = vbLeftButton Then
+        Select Case Index
+            Case 0
+                Timer1.Enabled = True
+                Direction = Left
+                Changed = True
+                Call Timer1_Timer
+                
+            Case 1
+                Timer1.Enabled = True
+                Direction = Up
+                Changed = True
+                Call Timer1_Timer
+                
+            Case 2
+                Timer1.Enabled = True
+                Direction = Right
+                Changed = True
+                Call Timer1_Timer
+
+                
+            Case 3
+                Timer1.Enabled = True
+                Direction = Down
+                Changed = True
+                Call Timer1_Timer
+                
+        End Select
+        
+    End If
+        
+End Sub
+
+Private Sub cmdShadowPos_MouseUp(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    If Button = vbLeftButton Then
+        Select Case Index
+        
+            Case 0 To 3
+                Timer1.Enabled = False
+        End Select
+        
+    End If
+     
+End Sub
+
+Private Sub PropertyPage_Initialize()
+    Timer1.Enabled = False
+    
+End Sub
+
+Private Sub Timer1_Timer()
+    Select Case Direction
+        Case Is = Left
+            Label2.Move Label2.Left - 10
+            
+        Case Is = Right
+            Label2.Move Label2.Left + 10
+            
+
+        Case Is = Up
+            Label2.Move Label2.Left, Label2.Top - 10
+            
+        Case Is = Down
+            Label2.Move Label2.Left, Label2.Top + 10
+            
+    End Select
+    intShadowLeft = Label2.Left - Label1.Left
+    intShadowTop = Label2.Top - Label1.Top
+    
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+    SelectedControls(0).ShadowTop = intShadowTop
+    SelectedControls(0).ShadowLeft = intShadowLeft
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+    intShadowTop = SelectedControls(0).ShadowTop
+    intShadowLeft = SelectedControls(0).ShadowLeft
+    
+    Label1.Left = (PropertyPage.Width - Label1.Width) / 2
+    Label2.Left = Label1.Left + intShadowLeft
+    Label2.Top = Label1.Top + intShadowTop
+    
+End Sub
+
+
+

@@ -1,0 +1,21 @@
+Line 12: Class ProjectLabel3D.Label3D of control Label3D3 was not a loaded control class.
+Line 51: Class ProjectLabel3D.Label3D of control Label3D2 was not a loaded control class.
+Line 83: Class ProjectLabel3D.Label3D of control Label3D1 was not a loaded control class.
+Line 18: The property name _ExtentX in Label3D3 is invalid.
+Line 19: The property name _ExtentY in Label3D3 is invalid.
+Line 38: The property name Caption in Label3D3 is invalid.
+Line 39: The property name Caption in Label3D3 is invalid.
+Line 40: The property name Color1 in Label3D3 is invalid.
+Line 41: The property name Color2 in Label3D3 is invalid.
+Line 57: The property name _ExtentX in Label3D2 is invalid.
+Line 58: The property name _ExtentY in Label3D2 is invalid.
+Line 77: The property name Caption in Label3D2 is invalid.
+Line 78: The property name Caption in Label3D2 is invalid.
+Line 79: The property name Color1 in Label3D2 is invalid.
+Line 80: The property name ShadowLeft in Label3D2 is invalid.
+Line 81: The property name ShadowTop in Label3D2 is invalid.
+Line 89: The property name _ExtentX in Label3D1 is invalid.
+Line 90: The property name _ExtentY in Label3D1 is invalid.
+Line 109: The property name Caption in Label3D1 is invalid.
+Line 110: The property name Caption in Label3D1 is invalid.
+Line 111: The property name ShadowLeft in Label3D1 is invalid.
